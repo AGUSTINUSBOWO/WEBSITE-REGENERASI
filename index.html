@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regenerasi Organisasi</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    #page1, #page2, #page3 {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: white;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    #page1 {
+      display: flex;
+      background: url('PA2.png') no-repeat center center fixed;
+      background-size: cover;
+      position: relative;
+    }
+
+    #page2 {
+      background: url('berhasil.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    #page3 {
+      background: url('gagal.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    .header-text {
+      position: relative;
+      text-align: center;
+      font-size: 2rem;
+      color: white;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+      line-height: 1.5;
+    }
+
+    .header-text span {
+      display: block;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .search-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 80%;
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 25px;
+      outline: none;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .search-bar button {
+      padding: 15px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .search-bar button:hover {
+      background-color: #0056b3;
+      transform: scale(1.1);
+    }
+
+    .result, .error-message {
+      margin-top: 20px;
+      font-size: 1.5rem;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      animation: fadeInUp 1s ease-out;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 25px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+      transform: scale(1.1);
+    }
+
+    .back-button {
+      background-color: #FF6347;
+    }
+
+    .back-button:hover {
+      background-color: #D9534F;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="page1">
+    <div class="header-text">
+      <span>Regenerasi Pengurus</span>
+      <span>Misdinar Somohitan</span>
+      <span>Periode 2025/2027</span>
+    </div>
+    <div class="search-bar">
+      <input type="text" id="nameInput" placeholder="NAMA PANGGILAN(KAPITAL)">
+      <button onclick="checkName()">Kirim</button>
+    </div>
+  </div>
+
+  <div class="container" id="page2">
+    <div class="result" id="resultContainer">
+      <h2 id="resultTitle"></h2>
+      <p id="resultMessage"></p>
+    </div>
+    <button class="back-button" onclick="goBack()">Kembali</button>
+  </div>
+
+  <div class="container" id="page3">
+    <div class="error-message">
+      <h2>Maaf!</h2>
+      <p>Nama kamu tidak terdaftar.</p>
+    </div>
+    <button class="back-button" onclick="goBack()">Kembali</button>
+  </div>
+
+  <script>
+    const data = {
+      "GADA": "Ketua 1",
+      "CLEO": "Ketua 2",
+      "NAOMI": "Sekretaris 2",
+      "MERI": "Sekretaris 1",
+      "RANI": "Bendahara 1",
+      "ANGGUN": "Bendahara 2",
+      "TYO": "Liturgi",
+      "LITA": "Liturgi",
+      "FANNY": "Liturgi",
+      "LEON": "Humas",
+      "MOREL": "Humas",
+      "CLARA": "Usda",
+      "ANDRE": "Usda",
+      "ANIN": "Usda",
+      "OLA": "Pubdok",
+      "KRISTO": "Pubdok",
+      "VIAN": "Konsumsi",
+      "NADA": "Konsumsi",
+      "PAUL": "Miba" ,
+      "DELA" : "Miba"
+    };
+
+    function checkName() {
+      const name = document.getElementById("nameInput").value.trim();
+      const page1 = document.getElementById("page1");
+      const page2 = document.getElementById("page2");
+      const page3 = document.getElementById("page3");
+
+      if (data[name]) {
+        document.getElementById("resultTitle").innerHTML = `Selamat, ${name}!`;
+        document.getElementById("resultMessage").innerHTML = `Kamu menjadi <strong>${data[name]}</strong> dalam Pengurus PA Somohitan.`;
+        page1.style.display = "none";
+        page2.style.display = "flex";
+      } else {
+        page1.style.display = "none";
+        page3.style.display = "flex";
+      }
+    }
+
+    function goBack() {
+      document.getElementById("page1").style.display = "flex";
+      document.getElementById("page2").style.display = "none";
+      document.getElementById("page3").style.display = "none";
+    }
+  </script>
+</body>
+</html>

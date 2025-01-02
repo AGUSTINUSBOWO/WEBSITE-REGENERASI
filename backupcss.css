@@ -1,0 +1,170 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  #page1, #page2, #page3 {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+    animation: fadeIn 1.5s ease-in-out; /* Animasi masuk */
+  }
+  
+  #page1 {
+    display: flex; /* Halaman pertama langsung terlihat */
+    background: url('PA1.png') no-repeat center center fixed; /* Gambar untuk Dashboard */
+    background-size: cover;
+  }
+  
+  #page2 {
+    display: none;
+    background: url('berhasil.png') no-repeat center center fixed; /* Gambar untuk Success Page */
+    background-size: cover;
+  }
+  
+  #page3 {
+    display: none;
+    background: url('gagal.png') no-repeat center center fixed; /* Gambar untuk Error Page */
+    background-size: cover;
+  }
+  
+  h1 {
+    font-size: 3rem; /* Ukuran font default */
+    margin-bottom: 20px;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+    animation: slideDown 1s ease-in-out;
+  }
+  
+  /* Menyesuaikan ukuran font pada layar kecil */
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 1.5rem; /* Ukuran font lebih kecil di layar mobile */
+    }
+  }
+  
+  /* Menyesuaikan ukuran font pada layar sangat kecil */
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 1.2rem; /* Ukuran font lebih kecil lagi pada perangkat yang lebih kecil */
+    }
+  }
+  
+  .search-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 80%;
+    max-width: 500px;
+    margin: 20px auto;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 25px;
+    outline: none;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .search-bar input:focus {
+    transform: scale(1.05); /* Efek perbesar */
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.8);
+  }
+  
+  .search-bar button {
+    padding: 15px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Efek hover */
+  }
+  
+  .search-bar button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1); /* Perbesar tombol saat hover */
+  }
+  
+  .result, .error-message {
+    margin-top: 20px;
+    font-size: 1.5rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 1s ease-out; /* Efek masuk dari bawah */
+  }
+  
+  .result h2, .error-message h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .result p, .error-message p {
+    font-size: 1.2rem;
+    margin: 5px 0;
+  }
+  
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 20px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Efek hover */
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1); /* Perbesar tombol saat hover */
+  }
+  
+  /* Animasi Keyframes */
+  @keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+  }
+  
